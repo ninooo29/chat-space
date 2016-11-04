@@ -1,24 +1,40 @@
-# README
+#ChatSpace
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+##Database creation
 
-Things you may want to cover:
+##tables
 
-* Ruby version
+###users
+| column | type | unique | index | null |
+|:------:|:----:|:------:|:-----:|:----:|
+| name | string |        | true  | false |
+| email | string | true  |       | false |
+| group_id | integer |
 
-* System dependencies
+###messages
+| column | type |
+|:------:|:----:|
+| body   | text |
+| images | string |
+| group_id | integer |
+| user_id | integer |
 
-* Configuration
+###groups
+| column | type | unique | null |
+|:------:|:----:|:------:|:----:|
+| key    | string | true | false |
+| user_id | integer |
 
-* Database creation
+##association
 
-* Database initialization
+###User
+- belongs_to:group
+- has_manys:messages
 
-* How to run the test suite
+###Message
+- belongs_to:user
+- belongs_to:group
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+###Group
+- has_many:users
+- has_many:messages
