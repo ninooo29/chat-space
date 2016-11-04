@@ -5,44 +5,44 @@
 ##tables
 
 ###users
-| column | type | unique | index | null |
-|:------:|:----:|:------:|:-----:|:----:|
-| name | string |        | true  | false |
-| email | string | true  | true  | false |
-| group_id | integer |
+| column | type | unique | index | null | foreign_key |
+|:------:|:----:|:------:|:-----:|:----:|:-----------:|
+| name | string |        | true  | false |            |
+| email | string | true  | true  | false |            |
+| group_id | references ||       |       | true       |
 
 ###messages
 | column | type |foreign_key|
 |:------:|:----:|:---------:|
-| body   | text |
-| images | string |
+| body   | text |           |
+| image  | string |         |
 | group_id | references | true |
-| user_id | integer |
+| user_id | references  | true |
 
 ###groups
 | column | type | unique | null | foreign_key |
 |:------:|:----:|:------:|:----:|:-----------:|
-| group_name | string | true | false |
-| user_id | references ||| true |
+| group_name | string | true | false |        |
+| user_id | references | |      | true        |
 
 ###users_groups
-| column |type|
-|:------:|:--:|
-| user_id | integer |
-| group_id| integer |
+| column |type| foreign_key |
+|:------:|:--:|:-----------:|
+| user_id | references | true |
+| group_id| references | true |
 
 ##association
 
 ###User
-- has_many:users_groups
-- has_many:groups, through: :users_groups
-- has_many:messages
+- has_many :users_groups
+- has_many :groups, through: :users_groups
+- has_many :messages
 
 ###Message
-- belongs_to:user
-- belongs_to:group
+- belongs_to :user
+- belongs_to :group
 
 ###Group
-- has_many:users_groups
-- has_many:users, through: :users_groups
-- has_many:messages
+- has_many :users_groups
+- has_many :users, through: :users_groups
+- has_many :messages
