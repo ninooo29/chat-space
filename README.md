@@ -46,3 +46,7 @@
 - has_many :users_groups
 - has_many :users, through: :users_groups
 - has_many :messages
+
+###User_Group
+- belongs_to :user
+- belongs_to :group
