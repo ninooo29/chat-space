@@ -16,7 +16,7 @@ gem 'devise'
 
 #view
 gem 'haml-rails'
-
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
