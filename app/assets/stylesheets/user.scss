@@ -1,12 +1,9 @@
-$main_color: #fff;
-$button_color: #38aef0;
-
 .account-page {
   &__inner {
     width: 980px;
     margin: 60px auto;
     padding: 60px;
-    background-color: $main_color;
+    background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 5px;
 
@@ -33,7 +30,7 @@ $button_color: #38aef0;
         display: block;
         width: 60px;
         margin-top: 5px;
-        border-bottom: 1px solid $button_color;
+        border-bottom: 1px solid #38aef0;
       }
     }
 
@@ -45,7 +42,7 @@ $button_color: #38aef0;
 
     .btn {
       margin-top: 20px;
-      color: $main_color;
+      @include color();
       background-color: #ccc;
       font-size: 14px;
     }
@@ -88,8 +85,8 @@ $button_color: #38aef0;
   input[type='submit'] {
     float: left;
     margin-top: 20px;
-    color: $main_color;
-    background-color: $button_color;
+    @include color();
+    background-color: #38aef0;
   }
 
   .field-label {
