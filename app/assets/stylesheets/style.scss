@@ -1,0 +1,89 @@
+$section-color: #fff;
+
+html {
+  height: 100%;
+  width: 100%;
+}
+
+div {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+.fa {
+  display: inline-block;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+ul, menu, dir {
+  display: block;
+  list-style-type: disc;
+  -webkit-margin-before: 1em;
+  -webkit-margin-after: 1em;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
+  -webkit-padding-start: 40px;
+}
+
+li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+label {
+  cursor: default;
+}
+
+botton, input, optgroup, select, textarea {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+form {
+    display: block;
+    margin-top: 0em;
+}
+
+body{
+  height: 100%;
+  width: 100%;
+  margin: 0px;
+}
+
+.chat {
+  height: 100%;
+  .chat-side{
+    float: left;
+    height: 100%;
+    width: 300px;
+    background-color: #2f3e51;
+    .chat-user{
+      height: 100px;
+      @include clearfix();
+      padding: 20px;
+      color: $section-color;
+      background-color: #253141;
+      box-sizing: border-box;
+      h5 {
+        float: left;
+        line-height: 60px;
+        letter-spacing: 2px;
+        font-size: 16px;
+      }
+      &__actions{
+        float: right;
+        .fa {
+          line-height: 60px;
+        }
+      }
+    }
+    @include chat-groups();
+  }
+  @include chat-main();
+}

@@ -1,0 +1,36 @@
+%body
+  .chat
+    .chat-side
+      .chat-user.clearfix
+        %h5 seo
+        .chat-user__actions
+          %i.fa.fa-pencil-square-o
+          %i.fa.fa-cog
+      %ul.chat-groups
+        %li.chat-group
+          %p.chat-group__name sample
+          %p.chat-group__message Good boy work
+    .chat-main
+      .chat-header.clearfix
+        .chat-header--left
+          %h2 sample
+          %p.chat-header__users
+            Menbers:
+            %span.chat-header__user  kazuki
+        .chat-header--right
+          %a.chat-header--right__edit-btn Edit
+      .chat-body
+        %ul.chat-messages
+          %li.chat-message
+            .chat-message__header.clearfix
+              %p.chat-message__header--name kazuki
+              %p.chat-message__header--time 2016/11/12 06:50:56
+            %p.chat-message__body hogehogehoge
+      .chat-footer
+        %form.new_message
+          .chat-footer__body
+            %textarea
+            %label.chat-footer__file
+              %input(type="file" name="message[image]" id="message_image")
+              %i.fa.fa-image
+          %input(value="Send")

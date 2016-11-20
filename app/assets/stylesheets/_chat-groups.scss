@@ -1,0 +1,23 @@
+@mixin chat-groups(){
+  .chat-groups {
+    margin: 0;
+    padding: 0;
+    color: $section-color;
+    list-style: none;
+    .chat-group {
+      padding: 20px 20px;
+      color: $section-color;
+      &__name {
+        display: iniline-block;
+        font-size: 15px;
+        margin-bottom: 5px;
+      }
+      &__message {
+        font-size: 11px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+  }
+}

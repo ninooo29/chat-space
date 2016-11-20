@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 
-
 # function
 gem 'rails', '~> 5.0.0', '>= 5.0.0.1'
 gem 'mysql2', '>= 0.3.18', '< 0.5'
@@ -16,7 +15,7 @@ gem 'devise'
 
 #view
 gem 'haml-rails'
-
+gem 'font-awesome-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri
