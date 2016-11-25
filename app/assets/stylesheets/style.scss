@@ -78,8 +78,15 @@ body{
       }
       &__actions{
         float: right;
-        .fa {
-          line-height: 60px;
+        .chat-user__action{
+          display: inline-block;
+          margin: 15px 0 15px 3px;
+          line-height: 28px;
+          color: #fff;
+          font-size: 20px;
+          .fa {
+            line-height: 60px;
+          }
         }
       }
     }
