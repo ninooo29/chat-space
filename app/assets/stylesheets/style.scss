@@ -63,26 +63,7 @@ body{
     height: 100%;
     width: 300px;
     background-color: #2f3e51;
-    .chat-user{
-      height: 100px;
-      @include clearfix();
-      padding: 20px;
-      color: $section-color;
-      background-color: #253141;
-      box-sizing: border-box;
-      h5 {
-        float: left;
-        line-height: 60px;
-        letter-spacing: 2px;
-        font-size: 16px;
-      }
-      &__actions{
-        float: right;
-        .fa {
-          line-height: 60px;
-        }
-      }
-    }
+    @include chat-user();
     @include chat-groups();
   }
   @include chat-main();
