@@ -16,6 +16,8 @@ gem 'devise'
 #view
 gem 'haml-rails'
 gem 'font-awesome-rails'
+gem 'twitter-bootstrap-rails'
+gem 'bootstrap-material-design', '0.1.4'
 
 group :development, :test do
   gem 'byebug', platform: :mri
