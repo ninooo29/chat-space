@@ -8,9 +8,5 @@
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
 
-  .flash-messages
-    %p.flash-messages__notice
-      = notice
-    %p.flash-messages__alert
-      = alert
+  = render 'layouts/flash-messages'
   = yield
