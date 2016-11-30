@@ -1,0 +1,9 @@
+@mixin flash-messages(){
+  .flash-messages {
+    background-color: #38aef0;
+    p{
+      color: white;
+      text-align: center;
+    }
+  }
+}
