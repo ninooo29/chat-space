@@ -2,51 +2,48 @@ require 'rails_helper'
 
 describe User do
 
-  it "パスワードが8文字以下のとき無効な状態であること" do
-    user = User.new(password: "11111")
-    user.valid?
-    expect(user.errors[:password]).to include("は8文字以上で入力してください。")
-  end
 
-  it "全てが入力されていれば有効な状態であること" do
-    user = User.new(
-      name: 'kazuki',
-      email: 'aaa@gmail.com',
-      password: '11111111')
+
+  it "妥当なオブジェクト" do
+    user = build(:user)
     expect(user).to be_valid
   end
 
-  it "nameがないと無効な状態であること" do
-    user = User.new(name:nil)
-    user.valid?
-    expect(user.errors[:name]).to include("を入力してください。")
+  context "nameがないと無効な状態であること" do
+    let(:name){ nil }
+    example {"を入力してください。"}
   end
 
-  it "emailがないと無効な状態であること" do
-    user = User.new(email:nil)
-    user.valid?
-    expect(user.errors[:email]).to include("を入力してください。")
+  context "パスワードが7文字以下のとき無効な状態であること" do
+    let(:password){ "11111" }
+    example {"は7文字以上で入力してください。"}
   end
 
-  it "passwordがないと無効な状態であること" do
-    user = User.new(password:nil)
-    user.valid?
-    expect(user.errors[:password]).to include("を入力してください。")
+  context "パスワードが８文字以上のとき有効な値であること" do
+    let(:password){ "11111111" }
+    it { be_valid }
+  end
+
+  context "emailがないと無効な状態であること" do
+    let(:email){ nil }
+    example{"を入力してください。"}
+  end
+
+  context "passwordがないと無効な状態であること" do
+    let(:password){ nil }
+    example { "を入力してください。" }
+  end
+
+  context "パスワード確認がないと無効であること" do
+    let(:password_confirmation){ nil }
+    example {"とパスワードの入力が一致しません。"}
   end
 
   it "アドレスが重複している場合は無効な状態であること" do
-    User.create(
-      name: 'kazuki',
-      email: 'aaa@gmail.com',
-      password: '11111111'
-    )
-    user = User.new(
-      name: 'taro',
-      email: 'aaa@gmail.com',
-      password: '33333333'
-    )
-    user.valid?
-    expect(user.errors[:email]).to include("はすでに存在します。")
+    user = create(:user)
+    another_user = build(:user, email: user.email)
+    another_user.valid?
+    expect(another_user.errors[:email]).to include("はすでに存在します。")
   end
 
 end
