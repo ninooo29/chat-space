@@ -24,6 +24,9 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'faker'
+  gem 'forgery'
+  gem 'factory_girl_rails', "~> 4.4.1"
 end
 
 
