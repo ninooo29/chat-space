@@ -1,49 +1,57 @@
 require 'rails_helper'
 
 describe User do
+  describe '#create' do
+    it "is valid with a name, email, password" do
+      user = build(:user)
+      expect(user).to be_valid
+    end
 
+    describe 'name to change nil' do
+      let(:user){ build(:user, name: nil) }
+      it 'is invalid without a name' do
+        user.valid?
+        expect(user.errors[:name]).to include("を入力してください。")
+      end
+    end
 
+    describe 'email to change nil' do
+      let(:user){ build(:user, email: nil)}
+      it "is invalid without a email" do
+        user.valid?
+        expect(user.errors[:email]).to include("を入力してください。")
+      end
+    end
 
-  it "妥当なオブジェクト" do
-    user = build(:user)
-    expect(user).to be_valid
+    describe 'password to change nil' do
+      let(:user){ build(:user, password: nil)}
+      it "is valid without a password" do
+        user.valid?
+        expect(user.errors[:password]).to include("を入力してください。")
+      end
+    end
+
+    describe 'password_confirmation to change nil' do
+      let(:user){ build(:user, password_confirmation: "") }
+      it "is invalid without a password_confirmation although with a password" do
+        user.valid?
+        expect(user.errors[:password_confirmation]).to include("とパスワードの入力が一致しません。")
+      end
+    end
+
+    describe 'password chande to word count 7' do
+      let(:user){ build(:user, password: "111111")}
+      it "is valid with a password that has less than 7 characters " do
+        user.valid?
+        expect(user.errors[:password]). to include("は8文字以上で入力してください。")
+      end
+    end
+
+    describe 'password change to word count 8' do
+      let(:user){ build(:user, password: "aaaaaaaa")}
+      it "is valid with a password that has more than 8 characters" do
+        expect(user).to be_valid
+      end
+    end
   end
-
-  context "nameがないと無効な状態であること" do
-    let(:name){ nil }
-    example {"を入力してください。"}
-  end
-
-  context "パスワードが7文字以下のとき無効な状態であること" do
-    let(:password){ "11111" }
-    example {"は7文字以上で入力してください。"}
-  end
-
-  context "パスワードが８文字以上のとき有効な値であること" do
-    let(:password){ "11111111" }
-    it { be_valid }
-  end
-
-  context "emailがないと無効な状態であること" do
-    let(:email){ nil }
-    example{"を入力してください。"}
-  end
-
-  context "passwordがないと無効な状態であること" do
-    let(:password){ nil }
-    example { "を入力してください。" }
-  end
-
-  context "パスワード確認がないと無効であること" do
-    let(:password_confirmation){ nil }
-    example {"とパスワードの入力が一致しません。"}
-  end
-
-  it "アドレスが重複している場合は無効な状態であること" do
-    user = create(:user)
-    another_user = build(:user, email: user.email)
-    another_user.valid?
-    expect(another_user.errors[:email]).to include("はすでに存在します。")
-  end
-
 end
