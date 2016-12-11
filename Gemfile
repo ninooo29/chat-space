@@ -22,6 +22,11 @@ gem 'bootstrap-material-design', '0.1.4'
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'
+  gem 'rspec'
+  gem 'rspec-rails'
+  gem 'faker'
+  gem 'forgery'
+  gem 'factory_girl_rails', "~> 4.4.1"
 end
 
 
