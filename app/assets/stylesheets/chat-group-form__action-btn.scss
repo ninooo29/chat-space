@@ -1,0 +1,9 @@
+@mixin chat-group-form__action-btn(){
+  &__action-btn {
+    display: inline-block;
+    padding: 12px 20px;
+    color: #fff;
+    background-color: #38aef0;
+    border: 0;
+  }
+}

@@ -1,0 +1,23 @@
+.chat-group-form {
+  width: 980px;
+  margin: 60px auto;
+  padding: 40px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+
+  h1 {
+    letter-spacing: 2px;
+    font-size: 24px;
+    text-align: center;
+  }
+  @include chat-group__errors();
+
+  @include chat-group-form__field();
+
+  @include chat-group-user();
+
+  @include chat-group-form__action-btn();
+
+}
