@@ -5,11 +5,10 @@
 ##tables
 
 ###users
-| column | type | unique | index | null | foreign_key |
-|:------:|:----:|:------:|:-----:|:----:|:-----------:|
-| name | string |        | true  | false |            |
-| email | string | true  | true  | false |            |
-| group_id | references ||       |       | true       |
+| column | type | unique | index | null |
+|:------:|:----:|:------:|:-----:|:----:|
+| name | string |        | true  | false |
+| email | string | true  | true  | false |
 
 ###messages
 | column | type |foreign_key|
@@ -23,7 +22,6 @@
 | column | type | unique | null | foreign_key |
 |:------:|:----:|:------:|:----:|:-----------:|
 | group_name | string | true | false |        |
-| user_id | references | |      | true        |
 
 ###users_groups
 | column |type| foreign_key |
