@@ -4,6 +4,8 @@ class GroupsController < ApplicationController
   end
 
   def create
+    Group.create(create_params)
+    redirect_to :root and return
   end
 
   def edit
@@ -11,5 +13,10 @@ class GroupsController < ApplicationController
   end
 
   def update
+  end
+
+  private
+  def create_params
+    params.require(:group).permit(:group_name, { :user_ids=> [] })
   end
 end
