@@ -4,8 +4,16 @@ class GroupsController < ApplicationController
   end
 
   def create
-    Group.create(create_params)
-    redirect_to :root and return
+    @group = Group.new(create_params)
+
+
+    if @group.group_name.empty?
+      flash[:alert] = "グループ名を入力してください"
+      redirect_to new_group_path and return
+    elsif @group.save
+      flash[:notice] = 'チャットグループが作成されました。'
+      redirect_to :root and return
+    end
   end
 
   def edit
@@ -17,6 +25,6 @@ class GroupsController < ApplicationController
 
   private
   def create_params
-    params.require(:group).permit(:group_name, { :user_ids=> [] })
+    params.require(:group).permit(:group_name, { user_ids: [] })
   end
 end
