@@ -6,7 +6,6 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(create_params)
 
-
     if @group.group_name.empty?
       flash[:alert] = "グループ名を入力してください"
       redirect_to new_group_path and return
