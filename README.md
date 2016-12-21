@@ -21,7 +21,7 @@
 ###groups
 | column | type | unique | null | foreign_key |
 |:------:|:----:|:------:|:----:|:-----------:|
-| group_name | string | true | false |        |
+| name | string | true | false |        |
 
 ###users_groups
 | column |type| foreign_key |
