@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
-  root to: "top#index"
-  resources :groups, only: [:new, :edit, :create, :update]
+  root to: "groups#index"
+  resources :groups, only: [:new, :edit, :create, :update] do
+    resources :top
+  end
 end
