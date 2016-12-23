@@ -1,26 +1,16 @@
 %body
   .chat
-    .chat-side
-      .chat-user.clearfix
-        %h5 seo
-        .chat-user__actions
-          = link_to new_group_path, class: "chat-user__action" do
-            %i.fa.fa-pencil-square-o
-          = link_to edit_user_registration_path, class: "chat-user__action" do
-            %i.fa.fa-cog
-      %ul.chat-groups
-        %li.chat-group
-          %p.chat-group__name sample
-          %p.chat-group__message Good boy work
+    = render 'layouts/chat_side'
     .chat-main
       .chat-header.clearfix
         .chat-header--left
-          %h2 sample
+          %h2
+            = @group.name
           %p.chat-header__users
             Menbers:
             %span.chat-header__user  kazuki
         .chat-header--right
-          %a.chat-header--right__edit-btn Edit
+          = link_to "Edit", edit_group_path(@group) ,class: "chat-header--right__edit-btn"
       .chat-body
         %ul.chat-messages
           %li.chat-message
