@@ -10,8 +10,4 @@
   %ul.chat-groups
     - @groups.each do |group|
       %li.chat-group
-        = link_to group_top_index_path(group.id), class: 'chat-group__link'  do
-          %p.chat-group__name
-            = group.name
-          %p.chat-group__message
-            hello
+        = render partial: "layouts/chat_side_groups", locals: { group: group }
