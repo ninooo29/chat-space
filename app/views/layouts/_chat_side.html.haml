@@ -1,0 +1,13 @@
+.chat-side
+  .chat-user.clearfix
+    %h5
+      = current_user.name
+    .chat-user__actions
+      = link_to new_group_path, class: "chat-user__action" do
+        %i.fa.fa-pencil-square-o
+      = link_to edit_user_registration_path, class: "chat-user__action" do
+        %i.fa.fa-cog
+  %ul.chat-groups
+    - @groups.each do |group|
+      %li.chat-group
+        = render partial: "layouts/chat_side_groups", locals: { group: group }

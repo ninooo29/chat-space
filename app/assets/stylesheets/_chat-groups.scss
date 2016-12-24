@@ -4,6 +4,16 @@
     padding: 0;
     color: $section-color;
     list-style: none;
+
+    .chat-group__link {
+      display: block;
+      color: #fff;
+
+      &:hover {
+        background-color: #384a62;
+      }
+    }
+
     .chat-group {
       padding: 20px 20px;
       color: $section-color;
