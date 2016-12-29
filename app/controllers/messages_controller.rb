@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
   def create
     Message.create(messages_params)
     @groups = current_user.groups
-    redirect_to action: "index"
+    redirect_to group_messages_path
   end
 
   private
