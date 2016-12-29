@@ -1,0 +1,9 @@
+- @messages.each do |message|
+  %li.chat-message
+    .chat-message__header.clearfix
+      %p.chat-message__header--name
+        = message.user.name
+      %p.chat-message__header--time
+        = message.created_at
+    %p.chat-message__body
+      = message.body
