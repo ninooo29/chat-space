@@ -1,0 +1,23 @@
+%body
+  .chat
+    = render 'layouts/chat_side'
+    .chat-main
+      .chat-header.clearfix
+        .chat-header--left
+          %h2
+            = @group.name
+          %p.chat-header__users
+            Menbers:
+            %span.chat-header__user  kazuki
+        .chat-header--right
+          = link_to "Edit", edit_group_path(@group) ,class: "chat-header--right__edit-btn"
+      .chat-body
+        %ul.chat-messages
+          = render 'layouts/chat_message'
+      .chat-footer
+        = form_for(@message,url: "messages") do |f|
+          .new_message
+            .chat-footer__body
+              = f.text_area :body, placeholder: "type a message"
+            = f.hidden_field :group_id, value: @group.id
+            = f.submit "send"
