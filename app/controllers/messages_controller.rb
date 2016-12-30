@@ -1,21 +1,20 @@
 class MessagesController < ApplicationController
 
-  before_action :select_group, only: [ :index ]
+  before_action :involved_group, only: [ :index, :create ]
 
   def index
-    @groups = current_user.groups
+    @group = Group.find(params[:group_id])
     @message = Message.new
     @messages = Message.where(group_id: params[:group_id])
   end
 
-  def select_group
-    @group = Group.find(params[:group_id])
-  end
-
   def create
     Message.create(messages_params)
-    @groups = current_user.groups
     redirect_to group_messages_path
+  end
+
+  def involved_group
+    @groups = current_user.groups
   end
 
   private
