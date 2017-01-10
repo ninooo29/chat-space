@@ -25,11 +25,3 @@ $(function(){
   });
 });
 
-
-// $(function() {
-//   $('.new_message').on('submit', function(e) {
-//     e.preventDefault();
-//     message = $('#message_body').val();
-//     console.log(message);
-//   });
-// });
