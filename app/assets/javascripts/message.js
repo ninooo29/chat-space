@@ -1,6 +1,10 @@
 $(function(){
   function buildHTML(message){
-    var html = $('< li class="chat-message">').append(message.content);
+    var name = ('< p class="chat-message__header--name" >').append(message.name);
+    var time = ('< chat-message__header--time >').append(message.created_at);
+    var header = ('< chat-message__header >').append(name).append(time);
+    var message = ('< p class="chat-message__body" >').append(message.body);
+    var html = $('< li class="chat-message">').append(header).append(message);
     return html;
   }
   $('.new_message').on('send', function(e) {
@@ -12,7 +16,7 @@ $(function(){
       url: '/messages.json',
       data: {
         message: {
-          content: message
+          body: textField.val()
         }
       },
       dataType:'json'
@@ -21,6 +25,9 @@ $(function(){
       var html = buildHTML(data);
       $('.chat-messages').append(html);
       textField.val('');
+    })
+    .fail(function(){
+      console.log("error");
     })
   });
 });

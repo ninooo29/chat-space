@@ -13,7 +13,7 @@ class MessagesController < ApplicationController
     if @message.save
       respond_to do |format|
         format.html { redirect_to group_messages_path }
-        format.json { render json: @message }
+        format.json { render json: { message: { name: @message.user.name, created_at: @message.created_at, body: @message.body } } }
       end
     else
       flash[:alert] = "本文を入力してください。"
