@@ -18,6 +18,7 @@ gem 'haml-rails'
 gem 'font-awesome-rails'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-material-design', '0.1.4'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platform: :mri

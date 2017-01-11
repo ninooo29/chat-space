@@ -15,9 +15,4 @@
         %ul.chat-messages
           = render 'layouts/chat_message'
       .chat-footer
-        = form_for(@message,url: "messages") do |f|
-          .new_message
-            .chat-footer__body
-              = f.text_area :body, placeholder: "type a message"
-            = f.hidden_field :group_id, value: @group.id
-            = f.submit "send"
+        = render 'layouts/new_message_form'
