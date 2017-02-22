@@ -1,6 +1,7 @@
 @mixin chat-group-form__field(){
   &__field {
     margin-top: 30px;
+    clear:both;
 
     &--left {
       float: left;
