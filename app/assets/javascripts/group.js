@@ -1,25 +1,33 @@
-$(document).on('turbolinks:load', function () {
-  $("#user-search-field").on("keyup", function(){
-    var input = $("#user-search-field").val()
-    $(".chat-group-user").remove();
-    $.ajax({
-      type: 'GET',
-      url: '/users.json',
-      data: {
-        name: input
-      },
-      dataType:'json'
-    })
-    .done(function(data){
-      var users = data;
-      $.each(users, function(i, user){
-        $('#user-serch-result').append(buildHTML(user))
+$(function(){
+
+  $(document).on('turbolinks:load', function () {
+    Serchuser()
+  })
+
+  function Serchuser(){
+    $("#user-search-field").on("keyup", function(){
+      var input = $("#user-search-field").val()
+      $(".chat-group-user").remove();
+      $.ajax({
+        type: 'GET',
+        url: '/users.json',
+        data: {
+          name: input
+        },
+        dataType:'json'
+      })
+      .done(function(data){
+        var users = data;
+        $.each(users, function(i, user){
+          $('#user-serch-result').append(buildHTML(user))
+        })
+      })
+      .fail(function(data){
+        alert("userがいません");
       })
     })
-    .fail(function(data){
-      alert("userがいません");
-    })
-  })
+  }
+
 
   $(document).on("click", '.chat-group-user__btn--add' , function(){
     $(this).parent().remove();
