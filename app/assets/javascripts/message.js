@@ -1,34 +1,43 @@
 $(function(){
+
   function buildHTML(message){
-    var name = ('< p class="chat-message__header--name" >').append(message.name);
-    var time = ('< chat-message__header--time >').append(message.created_at);
-    var header = ('< chat-message__header >').append(name).append(time);
-    var message = ('< p class="chat-message__body" >').append(message.body);
-    var html = $('< li class="chat-message">').append(header).append(message);
+    var buildImage = "";
+    if(message.image) {
+      buildImage = '<img class="chat-message__image" src= ' +message.image + '>'
+    }
+
+    var html =  '<li class="chat-message">' +
+                  '<div class="chat-message__header clearfix">' +
+                    '<p class="chat-message__header--name">' + message.name + '</p>' +
+                    '<p class="chat-message__header--time"">' + message.created_at + '</p>' +
+                  '</div>' +
+                  '<p class="chat-message__body">' + message.body + '</p>' + buildImage +
+                '</li>';
     return html;
   }
-  $('.new_message').on('send', function(e) {
+
+  $('.new_message').on('submit', function(e) {
     e.preventDefault();
-    var textField = $('#message_body');
-    var message = textField.val();
+    $('#submit').removeAttr('data-disable-with');
+    var formData = new FormData($("#new_message")[0]);;
+
     $.ajax({
       type: 'POST',
-      url: '/messages.json',
-      data: {
-        message: {
-          body: textField.val()
-        }
-      },
-      dataType:'json'
+      url: './messages',
+      data: formData,
+      dataType:'json',
+      processData: false,
+      contentType: false
     })
+
     .done(function(data){
-      var html = buildHTML(data);
+      var html = buildHTML(data.message);
       $('.chat-messages').append(html);
-      textField.val('');
+      $('#message_body').val('')
     })
     .fail(function(){
-      console.log("error");
-    })
+      alert('エラーが発生しました');
+    });
   });
-});
 
+});

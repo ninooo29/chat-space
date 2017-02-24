@@ -13,8 +13,17 @@ class MessagesController < ApplicationController
     if @message.save
       respond_to do |format|
         format.html { redirect_to group_messages_path }
-        format.json { render json: @message }
+        format.json { render json:
+          { message:
+            { name: @message.user.name,
+              created_at: @message.created_at,
+              body: @message.body,
+              image: @message.image.url
+            }
+          }
+        }
       end
+      flash[:notice] = "メッセージを送信しました"
     else
       flash[:alert] = "本文を入力してください。"
       redirect_to group_messages_path
@@ -27,6 +36,6 @@ class MessagesController < ApplicationController
 
   private
   def messages_params
-    params.require(:message).permit(:body, :group_id).merge(user_id: current_user.id)
+    params.require(:message).permit(:body, :image, :group_id).merge(user_id: current_user.id)
   end
 end
