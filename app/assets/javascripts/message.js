@@ -16,6 +16,14 @@ $(function(){
     return html;
   }
 
+  function ReloadScroll(){
+    var height = $(".chat-messages").height();
+    $(".chat-body").animate({
+      scrollTop: height
+    }, "slow", "swing");
+  };
+
+
   $('.new_message').on('submit', function(e) {
     e.preventDefault();
     $('#submit').removeAttr('data-disable-with');
@@ -34,10 +42,30 @@ $(function(){
       var html = buildHTML(data.message);
       $('.chat-messages').append(html);
       $('#message_body').val('')
+      ReloadScroll();
     })
     .fail(function(){
       alert('エラーが発生しました');
     });
   });
 
+
+  if (window.location.href.match(/messages/)){
+    setInterval(reloadPage, 10000);
+    function reloadPage(){
+      $.ajax({
+        type: 'GET',
+        url: 'messages',
+        dataType: 'json'
+      })
+      .done(function(data){
+        var messages = data;
+        var AddHtml = "";
+        $.each(messages, function(i, message){
+          AddHtml += buildHTML(message);
+        });
+        $('.chat-messages').html(AddHtml);
+      });
+    }
+  };
 });

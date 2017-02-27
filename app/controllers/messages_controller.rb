@@ -6,6 +6,10 @@ class MessagesController < ApplicationController
     @group = Group.find(params[:group_id])
     @message = Message.new
     @messages = Message.where(group_id: params[:group_id])
+    respond_to do |format|
+      format.any
+      format.json { render json: @messages.map { |message| message.api_json } }
+    end
   end
 
   def create
