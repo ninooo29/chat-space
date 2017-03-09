@@ -3,7 +3,7 @@ $(function(){
   function buildHTML(message){
     var buildImage = "";
     if(message.image) {
-      buildImage = '<img class="chat-message__image" src= ' +message.image + '>'
+      buildImage = '<img class="chat-message__image" src= ' + message.image + '>'
     }
 
     var html =  '<li class="chat-message">' +
@@ -28,6 +28,7 @@ $(function(){
     e.preventDefault();
     $('#submit').removeAttr('data-disable-with');
     var formData = new FormData($("#new_message")[0]);;
+    console.log(formData);
 
     $.ajax({
       type: 'POST',
