@@ -14,6 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'carrierwave'
 gem 'rmagick'
+gem 'fog'
 
 #view
 gem 'haml-rails'
