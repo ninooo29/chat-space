@@ -24,6 +24,11 @@ gem 'bootstrap-material-design', '0.1.4'
 gem 'jquery-rails'
 gem 'jquery-turbolinks'
 
+
+group :production do
+  gem 'unicorn'
+end
+
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'pry-rails'
@@ -43,6 +48,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'erb2haml'
 end
+
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
