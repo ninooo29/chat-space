@@ -27,9 +27,8 @@ $(function(){
   $('.new_message').on('submit', function(e) {
     e.preventDefault();
     $('#submit').removeAttr('data-disable-with');
-    var formData = new FormData($("#new_message")[0]);;
-    console.log(formData);
-
+    var formData = new FormData($("#new_message")[0]);
+    console.log(formData)
     $.ajax({
       type: 'POST',
       url: './messages',

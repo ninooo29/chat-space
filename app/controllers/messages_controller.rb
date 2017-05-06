@@ -13,8 +13,8 @@ class MessagesController < ApplicationController
   end
 
   def create
-    @message = Message.new(messages_params)
-    if @message.save
+    message = Message.new(messages_params)
+    if message.save
       respond_to do |format|
         format.html { redirect_to group_messages_path }
         format.json { render json:
