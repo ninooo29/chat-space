@@ -7,27 +7,25 @@
       .chat-group-form__field--right
         = f.text_field :name, placeholder: "グループ名を入力してください", id: "group_name", class: "chat-group-form__input"
 
-      .chat-group-form__field.clearfix
-        .chat-group-form__field--left
-          = f.label :user_ids ,"チャットメンバーを追加" ,for: "user-search-field", class: "chat-group-form__label"
-        .chat-group-form__field--right
-          .chat-group-form__search.clearfix
-            %input#user-search-field.chat-group-form__input{ type: "text", placeholder: "追加したいユーザー名を入力してください" }
-          #user-serch-result
-
-      .chat-group-form__field.clearfix
-        .chat-group-form__field--left
-          = f.label 'チャットメンバー', class: 'chat-group-form__label'
-        .chat-group-form__field--right
-          #chat-group-users
-            - @group.users.each do |user|
-              .chat-group-user.clearfix{ id: "chat-group-user-#{user.id}" }
-                = f.hidden_field "chat_group[user_ids][]", value: user.id
-                %p.chat-group-user__name
-                  = user.name
-
+    .chat-group-form__field.clearfix
+      .chat-group-form__field--left
+        = f.label :user_ids ,"チャットメンバーを追加" ,for: "user-search-field", class: "chat-group-form__label"
+      .chat-group-form__field--right
+        .chat-group-form__search.clearfix
+          %input#user-search-field.chat-group-form__input{ type: "text", placeholder: "追加したいユーザー名を入力してください" }
+        #user-serch-result
 
     .chat-group-form__field.clearfix
       .chat-group-form__field--left
+        = f.label 'チャットメンバー', class: 'chat-group-form__label'
+      .chat-group-form__field--right
+        #chat-group-users
+          - @group.users.each do |user|
+            .chat-group-user.clearfix{ id: "chat-group-user-#{user.id}" }
+              = f.hidden_field "chat_group[user_ids][]", value: user.id
+              %p.chat-group-user__name
+                = user.name
+
+    .chat-group-form__field.clearfix
       .chat-group-form__field--right
         = f.submit "Save", data:{ disable_with: "Save"}, class: "chat-group-form__action-btn"
