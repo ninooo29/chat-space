@@ -1,13 +1,9 @@
 $(function(){
 
-  $(document).on('turbolinks:load', function () {
-    Serchuser()
-  })
-
   function Serchuser(){
     $("#user-search-field").on("keyup", function(){
       var input = $("#user-search-field").val()
-      $(".chat-group-user").remove();
+      $("#user-search-result").remove();
       $.ajax({
         type: 'GET',
         url: '/users.json',
@@ -27,18 +23,6 @@ $(function(){
       })
     })
   }
-
-
-  $(document).on("click", '.chat-group-user__btn--add' , function(){
-    $(this).parent().remove();
-    var id = $(this).data("userId");
-    var name = $(this).data("userName");
-    $('#chat-group-users').append(AddUser(id, name));
-  });
-
-  $(document).on('click', '.chat-group-user__btn--remove', function(){
-    $(this).parent().remove();
-  })
 
   function AddUser(id, name){
     var html = `
@@ -62,4 +46,20 @@ $(function(){
        </div>`;
     return html;
   }
+
+  $(document).on('turbolinks:load', function () {
+    Serchuser()
+  })
+
+  $(document).on("click", '.chat-group-user__btn--add' , function(){
+    // $(this).parent().remove();
+    var id = $(this).data("userId");
+    var name = $(this).data("userName");
+    $('#chat-group-users').append(AddUser(id, name));
+  });
+
+  $(document).on('click', '.chat-group-user__btn--remove', function(){
+    $(this).parent().remove();
+  })
+
 })
