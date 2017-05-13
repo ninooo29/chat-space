@@ -13,21 +13,13 @@ class MessagesController < ApplicationController
   end
 
   def create
-    message = Message.new(messages_params)
-    if message.save
+    @message = Message.new(messages_params)
+    if @message.save
+      flash[:notice] = "メッセージを送信しました"
       respond_to do |format|
         format.html { redirect_to group_messages_path }
-        format.json { render json:
-          { message:
-            { name: @message.user.name,
-              created_at: @message.created_at,
-              body: @message.body,
-              image: @message.image.url
-            }
-          }
-        }
+        format.json
       end
-      flash[:notice] = "メッセージを送信しました"
     else
       flash[:alert] = "本文を入力してください。"
       redirect_to group_messages_path

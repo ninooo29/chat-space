@@ -1,6 +1,7 @@
 $(function(){
 
   function buildHTML(message){
+    // debugger
     var buildImage = "";
     if(message.image) {
       buildImage = '<img class="chat-message__image" src= ' + message.image + '>'
@@ -23,49 +24,56 @@ $(function(){
     }, "slow", "swing");
   };
 
+  $(document).on('turbolinks:load', function () {
 
-  $('.new_message').on('submit', function(e) {
-    e.preventDefault();
-    $('#submit').removeAttr('data-disable-with');
-    var formData = new FormData($("#new_message")[0]);
-    console.log(formData)
-    $.ajax({
-      type: 'POST',
-      url: './messages',
-      data: formData,
-      dataType:'json',
-      processData: false,
-      contentType: false
-    })
-
-    .done(function(data){
-      var html = buildHTML(data.message);
-      $('.chat-messages').append(html);
-      $('#message_body').val('')
-      ReloadScroll();
-    })
-    .fail(function(){
-      alert('エラーが発生しました');
-    });
-  });
-
-
-  if (window.location.href.match(/messages/)){
-    setInterval(reloadPage, 10000);
-    function reloadPage(){
+    $('.new_message').on('submit', function(e) {
+      e.preventDefault();
+      $('#submit').removeAttr('data-disable-with');
+      var formData = new FormData($("#new_message")[0]);
+      var href = window.location.href
+      console.log(href)
       $.ajax({
-        type: 'GET',
-        url: 'messages',
-        dataType: 'json'
+        type: 'post',
+        url: href,
+        data: formData,
+        dataType: 'json',
+        processData: false,
+        contentType: false
       })
       .done(function(data){
-        var messages = data;
-        var AddHtml = "";
-        $.each(messages, function(i, message){
-          AddHtml += buildHTML(message);
-        });
-        $('.chat-messages').html(AddHtml);
+        debugger
+        var html = buildHTML(data);
+        $('.chat-messages').append(html);
+        $('#message_body').val('')
+        ReloadScroll();
+      })
+      .fail(function(){
+        alert('エラーが発生しました');
       });
-    }
-  };
+    });
+
+  })
+
+
+
+
+
+  // if (window.location.href.match(/messages/)){
+  //   setInterval(reloadPage, 10000);
+  //   function reloadPage(){
+  //     $.ajax({
+  //       type: 'GET',
+  //       url: 'messages',
+  //       dataType: 'json'
+  //     })
+  //     .done(function(data){
+  //       var messages = data;
+  //       var AddHtml = "";
+  //       $.each(messages, function(i, message){
+  //         AddHtml += buildHTML(message);
+  //       });
+  //       $('.chat-messages').html(AddHtml);
+  //     });
+  //   }
+  // };
 });
