@@ -8,7 +8,8 @@
             = @group.name
           %p.chat-header__users
             Menbers:
-            %span.chat-header__user  kazuki
+            %span.chat-header__user
+              = @group.users.pluck(:name).join(' ')
         .chat-header--right
           = link_to "Edit", edit_group_path(@group) ,class: "chat-header--right__edit-btn"
       .chat-body
