@@ -1,10 +1,10 @@
 - @messages.each do |message|
-  %li.chat-message
+  %li.chat-message{data: { id: message.id }}
     .chat-message__header.clearfix
       %p.chat-message__header--name
         = message.user.name
       %p.chat-message__header--time
-        = message.created_at
+        = message.created_at.strftime("%Y-%m-%d %H:%M:%S")
     %p.chat-message__body
       = message.body
       %br

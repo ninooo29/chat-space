@@ -1,19 +1,21 @@
 $(function(){
 
   function buildHTML(message){
-    // debugger
-    var buildImage = "";
-    if(message.image) {
-      buildImage = '<img class="chat-message__image" src= ' + message.image + '>'
+    if (message.image) {
+      var buildImage =`<img class="chat-message__image" src="${message.image}">`;
+    } else {
+      var buildImage = '';
     }
 
-    var html =  '<li class="chat-message">' +
-                  '<div class="chat-message__header clearfix">' +
-                    '<p class="chat-message__header--name">' + message.name + '</p>' +
-                    '<p class="chat-message__header--time"">' + message.created_at + '</p>' +
-                  '</div>' +
-                  '<p class="chat-message__body">' + message.body + '</p>' + buildImage +
-                '</li>';
+
+    var html = `<li class='chat-message clearfix' data-id=${message.id}>
+                  <div class='chat-message__header clearfix'>
+                    <p class="chat-message__header--name">${message.name}</p>
+                    <p class="chat-message__header--time">${message.time}</p>
+                  </div>
+                  <p class="chat-message__body">${message.body}</p>${buildImage}
+                </li>`
+
     return html;
   }
 
@@ -24,6 +26,33 @@ $(function(){
     }, "slow", "swing");
   };
 
+  function reloadPage(){
+    lastId = $('.chat-message').last().data('id')|| 0;
+    $.ajax({
+      url: './messages',
+      method: 'GET',
+      data: {
+        last_id: lastId,
+      },
+      dataType: 'json'
+    })
+    .done(function(data){
+      console.log("aaaa")
+      if (data.length != 0) {
+        console.log("aaaaaa")
+        var messages = data;
+        var AddHtml = "";
+        $.each(messages, function(i, message){
+          AddHtml += buildHTML(message);
+        });
+        $('.chat-messages').html(AddHtml);
+      }
+    })
+    // .fail(function(){
+    //   alert('エラーが発生しました');
+    // });
+  }
+
   $(document).on('turbolinks:load', function () {
 
     $('.new_message').on('submit', function(e) {
@@ -31,7 +60,6 @@ $(function(){
       $('#submit').removeAttr('data-disable-with');
       var formData = new FormData($("#new_message")[0]);
       var href = window.location.href
-      console.log(href)
       $.ajax({
         type: 'post',
         url: href,
@@ -41,7 +69,7 @@ $(function(){
         contentType: false
       })
       .done(function(data){
-        debugger
+        console.log("aaa")
         var html = buildHTML(data);
         $('.chat-messages').append(html);
         $('#message_body').val('')
@@ -54,26 +82,7 @@ $(function(){
 
   })
 
-
-
-
-
-  // if (window.location.href.match(/messages/)){
-  //   setInterval(reloadPage, 10000);
-  //   function reloadPage(){
-  //     $.ajax({
-  //       type: 'GET',
-  //       url: 'messages',
-  //       dataType: 'json'
-  //     })
-  //     .done(function(data){
-  //       var messages = data;
-  //       var AddHtml = "";
-  //       $.each(messages, function(i, message){
-  //         AddHtml += buildHTML(message);
-  //       });
-  //       $('.chat-messages').html(AddHtml);
-  //     });
-  //   }
-  // };
+  if (window.location.href.match(/messages/)){
+    setInterval(reloadPage, 10000);
+  };
 });
