@@ -6,14 +6,18 @@ class MessagesController < ApplicationController
     @group = Group.find(params[:group_id])
     @message = Message.new
     @messages = Message.where(group_id: params[:group_id])
+    # binding.pry
     respond_to do |format|
-      format.any
-      format.json { render json: @messages.map { |message| message.api_json } }
+      format.html
+      format.json{
+        @messages_add = @group.messages.where('id > ?', params[:last_id])
+      }
     end
   end
 
   def create
     @message = Message.new(messages_params)
+    # binding.pry
     if @message.save
       flash[:notice] = "メッセージを送信しました"
       respond_to do |format|
@@ -24,7 +28,7 @@ class MessagesController < ApplicationController
       flash[:alert] = "本文を入力してください。"
       redirect_to group_messages_path
     end
-  end
+  end 
 
   def involved_group
     @groups = current_user.groups
