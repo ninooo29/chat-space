@@ -1,6 +1,8 @@
 $(function(){
 
   function buildHTML(message){
+    console.log(message)
+    // debugger
     if (message.image) {
       var buildImage =`<img class="chat-message__image" src="${message.image}">`;
     } else {
@@ -29,17 +31,18 @@ $(function(){
   function reloadPage(){
     lastId = $('.chat-message').last().data('id')|| 0;
     $.ajax({
-      url: './messages',
+      url: window.location.href,
       method: 'GET',
       data: {
         last_id: lastId,
       },
-      dataType: 'json'
+      dataType: 'json',
     })
+
     .done(function(data){
-      console.log("aaaa")
+      debugger
       if (data.length != 0) {
-        console.log("aaaaaa")
+        console.log("clear")
         var messages = data;
         var AddHtml = "";
         $.each(messages, function(i, message){
@@ -48,9 +51,9 @@ $(function(){
         $('.chat-messages').html(AddHtml);
       }
     })
-    // .fail(function(){
-    //   alert('エラーが発生しました');
-    // });
+    .fail(function(){
+      console.log("fail")
+    });
   }
 
   $(document).on('turbolinks:load', function () {
